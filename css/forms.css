@@ -17,7 +17,7 @@
     padding: var(--esp-4);
     border: 1px solid var(--cor-borda);
     border-radius: var(--raio-grande);
-    background-color: var(--cor-branco);
+    background-color: var(--cor-superficie);
     row-gap: var(--esp-3);
 }
 
@@ -52,9 +52,9 @@
     width: 100%;
     min-height: 44px;
     padding: var(--esp-2) var(--esp-3);
-    border: 1px solid var(--cor-borda);
+    border: 1px solid var(--cor-borda-campo);
     border-radius: var(--raio-borda);
-    background-color: var(--cor-branco);
+    background-color: var(--cor-superficie);
     color: var(--cor-texto);
     font: inherit;
     transition: border-color var(--transicao), box-shadow var(--transicao), background-color var(--transicao);
@@ -76,7 +76,7 @@ textarea.form__campo {
 .form__campo:focus {
     outline: none;
     border-color: var(--cor-destaque);
-    box-shadow: 0 0 0 3px rgba(47, 93, 168, 0.25);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--cor-destaque) 35%, transparent);
 }
 
 /* ---------- Validação ---------- */
@@ -86,13 +86,13 @@ textarea.form__campo {
 }
 
 .form__campo[aria-invalid="true"]:focus {
-    box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.2);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--cor-erro) 30%, transparent);
 }
 
 .form__campo--valido {
     border-color: var(--cor-primaria);
     padding-right: 2.5rem;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231B6B4F' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 5 5 9-10'/%3E%3C/svg%3E");
+    background-image: var(--icone-valido);
     background-repeat: no-repeat;
     background-position: right 0.75rem center;
     background-size: 1.1rem;
@@ -125,7 +125,7 @@ select.form__campo--valido {
     flex-shrink: 0;
     border-radius: 50%;
     background-color: var(--cor-erro);
-    color: var(--cor-branco);
+    color: var(--cor-sobre-cor);
     font-size: 0.75rem;
     font-weight: var(--peso-negrito);
 }
@@ -199,7 +199,7 @@ select.form__campo--valido {
     align-items: center;
     justify-content: center;
     min-height: 44px;
-    border: 2px solid var(--cor-borda);
+    border: 2px solid var(--cor-borda-campo);
     border-radius: var(--raio-borda);
     font-weight: var(--peso-medio);
     cursor: pointer;
@@ -213,7 +213,7 @@ select.form__campo--valido {
 .opcoes-valor input:checked + span {
     border-color: var(--cor-primaria);
     background-color: var(--cor-sucesso-clara);
-    color: var(--cor-primaria-escura);
+    color: var(--cor-sucesso-texto);
 }
 
 .opcoes-valor input:focus-visible + span {

@@ -1,33 +1,55 @@
 /* ==========================================================================
    DESIGN SYSTEM - ONG Faculdade
    Todas as cores, fontes e espaçamentos do projeto partem daqui.
+
+   Temas: o atributo data-tema no <html> ("claro", "escuro" ou "alto-contraste")
+   é definido antes da primeira pintura por um script no <head> e pelo módulo
+   js/modules/temas.js. Cada tema só redefine os tokens de cor abaixo: os outros arquivos
+   CSS usam apenas var(--cor-*), nunca cores de tema fixas.
    ========================================================================== */
 
 :root {
+    color-scheme: light;
+
     /* ---------- Cores primárias ---------- */
-    --cor-primaria: #1B6B4F;          /* verde: identidade, botões principais */
-    --cor-primaria-escura: #124A37;   /* hover / foco / rodapé */
+    --cor-primaria: #1B6B4F;          /* verde: identidade, botões principais, texto de destaque */
+    --cor-primaria-escura: #124A37;
+    --cor-primaria-hover: var(--cor-primaria-escura);
 
     /* ---------- Cores secundárias ---------- */
     --cor-secundaria: #F2A33A;        /* âmbar: chamadas de doação */
-    --cor-secundaria-escura: #D98A1F; /* hover do botão de doação */
+    --cor-secundaria-escura: #D98A1F; /* hover do botão de doação e ícones de aviso */
     --cor-destaque: #2F5DA8;          /* azul: links, foco e informações */
+    --cor-destaque-hover: #244A87;
     --cor-erro: #C62828;              /* validação e alertas de erro */
+    --cor-erro-hover: #A61F1F;
 
     /* ---------- Neutras ---------- */
     --cor-texto: #1F2937;
     --cor-texto-suave: #4B5563;
-    --cor-borda: #D1D5DB;
-    --cor-fundo-alt: #F5F7F6;
-    --cor-branco: #FFFFFF;
+    --cor-borda: #D1D5DB;             /* divisórias e contorno de cards */
+    --cor-borda-campo: #6B7280;       /* contorno de campos: 3:1 exigido para componentes (WCAG 1.4.11) */
+    --cor-fundo-alt: #F5F7F6;         /* fundo da página */
+    --cor-superficie: #FFFFFF;        /* fundo de cards, cabeçalho, campos, modal e toasts */
+    --cor-branco: #FFFFFF;            /* branco literal: texto sobre as faixas escuras, fundo do logo */
 
-    /* ---------- Tons de feedback (fundos claros) ---------- */
+    /* ---------- Texto sobre fundos sólidos ---------- */
+    --cor-sobre-cor: #FFFFFF;         /* sobre primária, erro e destaque */
+    --cor-sobre-ambar: #1F2937;       /* sobre a secundária (âmbar) */
+    --cor-faixa: var(--cor-primaria-escura); /* faixas do cabeçalho de página e rodapé */
+
+    /* ---------- Tons de feedback ---------- */
     --cor-sucesso-clara: #E8F3EE;
+    --cor-sucesso-texto: #124A37;
     --cor-erro-clara: #FDECEC;
     --cor-aviso-clara: #FEF4E6;
     --cor-aviso-texto: #8A5300;
     --cor-info-clara: #EAF0F9;
     --cor-neutra-clara: #EEF0F2;
+    --cor-hover-sutil: rgba(31, 41, 55, 0.08);
+    --cor-veu: rgba(17, 24, 39, 0.6);  /* fundo atrás do modal e do menu mobile */
+
+    --icone-valido: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231B6B4F' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 5 5 9-10'/%3E%3C/svg%3E");
 
     /* ---------- Gráficos (validados para contraste e daltonismo) ---------- */
     --grafico-1: #1E7D52;
@@ -85,4 +107,108 @@
     :root {
         --container-max: 1320px;
     }
+}
+
+/* ==========================================================================
+   TEMA ESCURO
+   Fundos escuros esverdeados (não preto puro, que cansa a vista) e cores
+   claras o suficiente para manter 4,5:1. Sobre os botões coloridos o texto
+   passa a ser escuro, porque as cores de fundo ficaram claras.
+   ========================================================================== */
+:root[data-tema="escuro"] {
+    color-scheme: dark;
+
+    --cor-primaria: #4CC38A;
+    --cor-primaria-escura: #0E2A1F;
+    --cor-primaria-hover: #7DD8AB;
+    --cor-secundaria: #F2A33A;
+    --cor-secundaria-escura: #F7BC66;
+    --cor-destaque: #8AB4F8;
+    --cor-destaque-hover: #ADCBFA;
+    --cor-erro: #F28B82;
+    --cor-erro-hover: #F6AEA9;
+
+    --cor-texto: #E6EAE8;
+    --cor-texto-suave: #A9B4AE;
+    --cor-borda: #34403A;
+    --cor-borda-campo: #7C8A83;
+    --cor-fundo-alt: #0F1714;
+    --cor-superficie: #17201C;
+
+    --cor-sobre-cor: #0F1714;
+    --cor-sobre-ambar: #1F2937;
+    --cor-faixa: #0E2A1F;
+
+    --cor-sucesso-clara: #12301F;
+    --cor-sucesso-texto: #7EE2AE;
+    --cor-erro-clara: #3A1717;
+    --cor-aviso-clara: #36280F;
+    --cor-aviso-texto: #F7BC66;
+    --cor-info-clara: #16243A;
+    --cor-neutra-clara: #222C27;
+    --cor-hover-sutil: rgba(230, 234, 232, 0.1);
+    --cor-veu: rgba(0, 0, 0, 0.7);
+
+    --icone-valido: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234CC38A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 5 5 9-10'/%3E%3C/svg%3E");
+
+    --grafico-1: #2B9A6B;
+    --grafico-2: #C47A10;
+    --grafico-3: #7393DC;
+    --grafico-grade: #2A3530;
+
+    --sombra-1: 0 1px 3px rgba(0, 0, 0, 0.5);
+    --sombra-2: 0 8px 24px rgba(0, 0, 0, 0.55);
+    --sombra-3: 0 20px 48px rgba(0, 0, 0, 0.7);
+}
+
+/* ==========================================================================
+   TEMA DE ALTO CONTRASTE
+   Fundo preto, texto branco e cores saturadas, todas acima de 7:1 (nível AAA).
+   Os tons "claros" de feedback viram preto: o tipo do alerta fica na borda,
+   no ícone e no título, nunca só na cor de fundo.
+   ========================================================================== */
+:root[data-tema="alto-contraste"] {
+    color-scheme: dark;
+
+    --cor-primaria: #FFE14D;
+    --cor-primaria-escura: #000000;
+    --cor-primaria-hover: #FFFFFF;
+    --cor-secundaria: #FFB547;
+    --cor-secundaria-escura: #FFD08A;
+    --cor-destaque: #66D9FF;
+    --cor-destaque-hover: #FFFFFF;
+    --cor-erro: #FF8A8A;
+    --cor-erro-hover: #FFFFFF;
+
+    --cor-texto: #FFFFFF;
+    --cor-texto-suave: #FFFFFF;
+    --cor-borda: #FFFFFF;
+    --cor-borda-campo: #FFFFFF;
+    --cor-fundo-alt: #000000;
+    --cor-superficie: #000000;
+
+    --cor-sobre-cor: #000000;
+    --cor-sobre-ambar: #000000;
+    --cor-faixa: #000000;
+
+    --cor-sucesso-clara: #000000;
+    --cor-sucesso-texto: #7CFC9A;
+    --cor-erro-clara: #000000;
+    --cor-aviso-clara: #000000;
+    --cor-aviso-texto: #FFE14D;
+    --cor-info-clara: #000000;
+    --cor-neutra-clara: #000000;
+    --cor-hover-sutil: rgba(255, 255, 255, 0.2);
+    --cor-veu: rgba(0, 0, 0, 0.85);
+
+    --icone-valido: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237CFC9A' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 5 5 9-10'/%3E%3C/svg%3E");
+
+    --grafico-1: #7CFC9A;
+    --grafico-2: #FFE14D;
+    --grafico-3: #66D9FF;
+    --grafico-grade: #666666;
+
+    --sombra-1: none;
+    --sombra-2: none;
+    --sombra-3: none;
 }

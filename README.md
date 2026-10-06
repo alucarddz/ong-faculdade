@@ -29,6 +29,7 @@ Projeto acadêmico da disciplina de Desenvolvimento Front-end.
 - **Transparência:** gráficos de arrecadação e de destino dos recursos (Chart.js), com tabela de dados alternativa
 - **Componentes de feedback:** badges, alertas, modal e toasts, documentados em `html/componentes.html`
 - **Responsivo:** grid de 12 colunas com 5 breakpoints e menu hambúrguer no mobile
+- **Temas de cor:** claro, escuro e alto contraste, com modo automático que segue o sistema operacional
 
 ## Tecnologias
 
@@ -83,6 +84,8 @@ Usa o runner nativo do Node (`node --test`), que encontra os arquivos `tests/*.t
 | `tests/validacao.test.js` | Cálculo dos dígitos do CPF, sequências repetidas e formatos incompletos |
 | `tests/templates.test.js` | Escape contra XSS, formatação de moeda, badges, limite da barra de meta e estado do card |
 | `tests/storage.test.js` | Ida e volta em JSON, valor padrão, JSON corrompido, armazenamento indisponível, cadastros e doações (com `localStorage` simulado) |
+| `tests/contraste.test.js` | Lê `css/variables.css` e calcula o contraste WCAG de 29 pares de cor nos 3 temas (4,5:1 para texto, 3:1 para bordas e gráficos, 7:1 no alto contraste) |
+| `tests/temas.test.js` | Escolha do tema: preferência salva, modo automático, prioridade do alto contraste e valor inválido |
 
 As interações de interface (menu, modal, formulário, falha do CDN) foram validadas manualmente no navegador com o DevTools.
 
@@ -107,7 +110,7 @@ ong-faculdade/
 ├── js/
 │   ├── main.js             # ponto de entrada: rotas e inicialização
 │   ├── data/projetos.js    # dados dos projetos
-│   ├── modules/            # router, templates, validacao, storage, feedback, graficos
+│   ├── modules/            # router, templates, validacao, storage, feedback, graficos, temas
 │   └── views/              # uma tela por arquivo
 ├── scripts/servidor.js     # servidor local de desenvolvimento
 ├── tests/                  # testes automatizados
@@ -127,7 +130,10 @@ As dependências seguem um só sentido: `main.js` → `views/` → `modules/` �
 
 ## Acessibilidade
 
-- Contraste AA nas cores do Design System e paleta dos gráficos validada para daltonismo
+- **Três temas** trocados só por variáveis CSS (`<html data-tema="...">`): claro, escuro e alto contraste (AAA, 7:1)
+- Modo automático com `prefers-color-scheme` e `prefers-contrast`; a escolha manual fica no `localStorage` e é aplicada antes da primeira pintura
+- Suporte a `forced-colors` (alto contraste do Windows)
+- Contraste verificado por teste automatizado em todos os temas; paleta dos gráficos validada para daltonismo
 - Navegação completa por teclado, com `:focus-visible` e link "Pular para o conteúdo"
 - `aria-invalid`, `aria-describedby`, `aria-current` e `aria-expanded` atualizados pelo JavaScript
 - Foco movido para o conteúdo a cada troca de rota

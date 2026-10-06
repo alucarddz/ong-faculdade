@@ -36,15 +36,15 @@
     background-color: currentColor;
 }
 
-.badge--sucesso { --badge-cor: var(--cor-primaria-escura); --badge-fundo: var(--cor-sucesso-clara); }
+.badge--sucesso { --badge-cor: var(--cor-sucesso-texto); --badge-fundo: var(--cor-sucesso-clara); }
 .badge--erro    { --badge-cor: var(--cor-erro);            --badge-fundo: var(--cor-erro-clara); }
 .badge--aviso   { --badge-cor: var(--cor-aviso-texto);     --badge-fundo: var(--cor-aviso-clara); }
 .badge--info    { --badge-cor: var(--cor-destaque);        --badge-fundo: var(--cor-info-clara); }
 
 /* Versões sólidas (status de maior destaque) */
-.badge--primario { --badge-cor: var(--cor-branco); --badge-fundo: var(--cor-primaria); }
-.badge--urgente  { --badge-cor: var(--cor-branco); --badge-fundo: var(--cor-erro); }
-.badge--doar     { --badge-cor: var(--cor-texto);  --badge-fundo: var(--cor-secundaria); }
+.badge--primario { --badge-cor: var(--cor-sobre-cor); --badge-fundo: var(--cor-primaria); }
+.badge--urgente  { --badge-cor: var(--cor-sobre-cor); --badge-fundo: var(--cor-erro); }
+.badge--doar     { --badge-cor: var(--cor-sobre-ambar);  --badge-fundo: var(--cor-secundaria); }
 
 .badge--contorno {
     background-color: transparent;
@@ -149,13 +149,13 @@
     padding: 0;
     border: none;
     border-radius: var(--raio-grande);
-    background-color: var(--cor-branco);
+    background-color: var(--cor-superficie);
     color: var(--cor-texto);
     box-shadow: var(--sombra-3);
 }
 
 .modal::backdrop {
-    background-color: rgba(17, 24, 39, 0.6);
+    background-color: var(--cor-veu);
     backdrop-filter: blur(2px);
 }
 
@@ -288,7 +288,7 @@
     overflow: hidden;
     border-radius: var(--raio-borda);
     border-left: 4px solid var(--toast-cor);
-    background-color: var(--cor-branco);
+    background-color: var(--cor-superficie);
     box-shadow: var(--sombra-2);
     pointer-events: auto;
     animation: toast-entrar 0.3s ease;
