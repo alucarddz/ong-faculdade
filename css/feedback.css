@@ -1,0 +1,375 @@
+/* ==========================================================================
+   COMPONENTES DE FEEDBACK - badges, alertas, modal e toasts
+   Cada variante só redefine duas variáveis locais (--*-cor e --*-fundo),
+   então o back-end troca o tipo apenas mudando a classe modificadora.
+   ========================================================================== */
+
+/* ---------- 1. BADGES ---------- */
+.badge {
+    --badge-cor: var(--cor-texto-suave);
+    --badge-fundo: var(--cor-neutra-clara);
+
+    display: inline-flex;
+    align-items: center;
+    gap: var(--esp-1);
+    padding: var(--esp-1) var(--esp-3);
+    border: 1px solid transparent;
+    border-radius: var(--raio-pilula);
+    background-color: var(--badge-fundo);
+    color: var(--badge-cor);
+    font-size: var(--fs-pequeno);
+    font-weight: var(--peso-medio);
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.badge .icone {
+    width: 1em;
+    height: 1em;
+}
+
+/* Ponto de status */
+.badge__ponto {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: currentColor;
+}
+
+.badge--sucesso { --badge-cor: var(--cor-primaria-escura); --badge-fundo: var(--cor-sucesso-clara); }
+.badge--erro    { --badge-cor: var(--cor-erro);            --badge-fundo: var(--cor-erro-clara); }
+.badge--aviso   { --badge-cor: var(--cor-aviso-texto);     --badge-fundo: var(--cor-aviso-clara); }
+.badge--info    { --badge-cor: var(--cor-destaque);        --badge-fundo: var(--cor-info-clara); }
+
+/* Versões sólidas (status de maior destaque) */
+.badge--primario { --badge-cor: var(--cor-branco); --badge-fundo: var(--cor-primaria); }
+.badge--urgente  { --badge-cor: var(--cor-branco); --badge-fundo: var(--cor-erro); }
+.badge--doar     { --badge-cor: var(--cor-texto);  --badge-fundo: var(--cor-secundaria); }
+
+.badge--contorno {
+    background-color: transparent;
+    border-color: var(--cor-borda);
+}
+
+/* Pulso suave no badge urgente para chamar atenção */
+.badge--urgente .badge__ponto {
+    animation: pulso 1.6s ease-in-out infinite;
+}
+
+@keyframes pulso {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.35; }
+}
+
+.badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--esp-2);
+}
+
+
+/* ---------- 2. ALERTAS ---------- */
+.alerta {
+    --alerta-cor: var(--cor-destaque);
+    --alerta-fundo: var(--cor-info-clara);
+
+    display: flex;
+    align-items: flex-start;
+    gap: var(--esp-3);
+    padding: var(--esp-3) var(--esp-4);
+    border-left: 4px solid var(--alerta-cor);
+    border-radius: var(--raio-borda);
+    background-color: var(--alerta-fundo);
+    color: var(--cor-texto);
+    animation: alerta-entrar 0.3s ease;
+}
+
+.alerta__icone {
+    width: 24px;
+    height: 24px;
+    margin-top: 2px;
+    color: var(--alerta-cor);
+}
+
+.alerta__conteudo {
+    flex: 1;
+}
+
+.alerta__titulo {
+    font-family: var(--fonte-titulo);
+    font-size: var(--fs-base);
+    font-weight: var(--peso-negrito);
+    color: var(--alerta-cor);
+    margin-bottom: var(--esp-1);
+}
+
+.alerta__texto {
+    font-size: var(--fs-pequeno);
+    color: var(--cor-texto);
+}
+
+.alerta__acao {
+    display: inline-block;
+    margin-top: var(--esp-2);
+    font-size: var(--fs-pequeno);
+    font-weight: var(--peso-medio);
+    color: var(--alerta-cor);
+}
+
+.alerta--sucesso { --alerta-cor: var(--cor-primaria); --alerta-fundo: var(--cor-sucesso-clara); }
+.alerta--erro    { --alerta-cor: var(--cor-erro);     --alerta-fundo: var(--cor-erro-clara); }
+.alerta--aviso   { --alerta-cor: var(--cor-aviso-texto); --alerta-fundo: var(--cor-aviso-clara); }
+.alerta--info    { --alerta-cor: var(--cor-destaque); --alerta-fundo: var(--cor-info-clara); }
+
+.alerta--saindo {
+    animation: alerta-sair 0.25s ease forwards;
+}
+
+@keyframes alerta-entrar {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes alerta-sair {
+    to { opacity: 0; transform: translateX(16px); }
+}
+
+.alertas {
+    display: flex;
+    flex-direction: column;
+    gap: var(--esp-3);
+}
+
+
+/* ---------- 3. MODAL (<dialog> nativo) ---------- */
+.modal {
+    width: min(92vw, 520px);
+    max-height: 90vh;
+    margin: auto;
+    padding: 0;
+    border: none;
+    border-radius: var(--raio-grande);
+    background-color: var(--cor-branco);
+    color: var(--cor-texto);
+    box-shadow: var(--sombra-3);
+}
+
+.modal::backdrop {
+    background-color: rgba(17, 24, 39, 0.6);
+    backdrop-filter: blur(2px);
+}
+
+.modal[open] {
+    animation: modal-entrar 0.25s ease;
+}
+
+.modal[open]::backdrop {
+    animation: fundo-entrar 0.25s ease;
+}
+
+.modal__cabecalho {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--esp-3);
+    padding: var(--esp-4) var(--esp-4) var(--esp-3);
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.modal__icone {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background-color: var(--cor-aviso-clara);
+    color: var(--cor-secundaria-escura);
+}
+
+.modal__titulo-grupo {
+    display: flex;
+    align-items: center;
+    gap: var(--esp-3);
+}
+
+.modal__titulo {
+    font-size: var(--fs-h4);
+}
+
+.modal__subtitulo {
+    font-size: var(--fs-pequeno);
+    color: var(--cor-texto-suave);
+}
+
+.modal__corpo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--esp-3);
+    padding: var(--esp-4);
+}
+
+.modal__resumo {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--esp-2) var(--esp-4);
+    padding: var(--esp-3);
+    border-radius: var(--raio-borda);
+    background-color: var(--cor-fundo-alt);
+    font-size: var(--fs-pequeno);
+}
+
+.modal__resumo dt {
+    color: var(--cor-texto-suave);
+}
+
+.modal__resumo dd {
+    font-weight: var(--peso-medio);
+    text-align: right;
+}
+
+.modal__rodape {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: var(--esp-2);
+    padding: var(--esp-3) var(--esp-4) var(--esp-4);
+}
+
+@media (min-width: 576px) {
+    .modal__rodape {
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+}
+
+@keyframes modal-entrar {
+    from { opacity: 0; transform: translateY(16px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes fundo-entrar {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+
+/* ---------- 4. TOASTS ---------- */
+.toasts {
+    position: fixed;
+    right: var(--esp-3);
+    bottom: var(--esp-3);
+    left: var(--esp-3);
+    z-index: var(--z-toast);
+    display: flex;
+    flex-direction: column;
+    gap: var(--esp-2);
+    pointer-events: none;
+}
+
+@media (min-width: 576px) {
+    .toasts {
+        left: auto;
+        right: var(--esp-4);
+        bottom: var(--esp-4);
+        width: 380px;
+    }
+}
+
+.toast {
+    --toast-cor: var(--cor-destaque);
+
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--esp-3);
+    padding: var(--esp-3);
+    padding-left: var(--esp-4);
+    overflow: hidden;
+    border-radius: var(--raio-borda);
+    border-left: 4px solid var(--toast-cor);
+    background-color: var(--cor-branco);
+    box-shadow: var(--sombra-2);
+    pointer-events: auto;
+    animation: toast-entrar 0.3s ease;
+}
+
+.toast__icone {
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+    color: var(--toast-cor);
+}
+
+.toast__conteudo {
+    flex: 1;
+    min-width: 0;
+}
+
+.toast__titulo {
+    font-weight: var(--peso-negrito);
+    font-size: var(--fs-base);
+    line-height: 1.3;
+}
+
+.toast__texto {
+    font-size: var(--fs-pequeno);
+    color: var(--cor-texto-suave);
+}
+
+/* Barra de tempo restante: ao terminar, o JS remove o toast */
+.toast__progresso {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--toast-cor);
+    transform-origin: left;
+    animation: toast-tempo 5s linear forwards;
+}
+
+.toast:hover .toast__progresso,
+.toast:focus-within .toast__progresso {
+    animation-play-state: paused;
+}
+
+.toast--sucesso { --toast-cor: var(--cor-primaria); }
+.toast--erro    { --toast-cor: var(--cor-erro); }
+.toast--aviso   { --toast-cor: var(--cor-secundaria-escura); }
+.toast--info    { --toast-cor: var(--cor-destaque); }
+
+.toast--saindo {
+    animation: toast-sair 0.25s ease forwards;
+}
+
+/* Versão estática, usada só na vitrine da documentação */
+.toast--estatico {
+    animation: none;
+}
+
+.toast--estatico .toast__progresso {
+    animation: none;
+    transform: scaleX(0.6);
+}
+
+@keyframes toast-entrar {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes toast-sair {
+    to { opacity: 0; transform: translateX(100%); }
+}
+
+@keyframes toast-tempo {
+    from { transform: scaleX(1); }
+    to   { transform: scaleX(0); }
+}
+
+/* A barra de tempo não é "movimento decorativo": mantém a duração real */
+@media (prefers-reduced-motion: reduce) {
+    .toast__progresso {
+        animation-duration: 5s !important;
+    }
+}

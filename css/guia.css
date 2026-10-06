@@ -1,0 +1,177 @@
+/* ==========================================================================
+   LAYOUT DA PÁGINA DE COMPONENTES (guia de estilo)
+   ========================================================================== */
+
+.guia-cabecalho {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-header);
+    background-color: var(--cor-primaria-escura);
+    color: var(--cor-branco);
+    box-shadow: var(--sombra-1);
+}
+
+.guia-cabecalho__conteudo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--esp-3);
+    padding-block: var(--esp-3);
+}
+
+.guia-cabecalho__marca {
+    display: flex;
+    align-items: center;
+    gap: var(--esp-3);
+}
+
+.guia-cabecalho__marca img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    border-radius: var(--raio-borda);
+    background-color: var(--cor-branco);
+    padding: var(--esp-1);
+}
+
+.guia-cabecalho__nome {
+    font-family: var(--fonte-titulo);
+    font-weight: var(--peso-negrito);
+    font-size: var(--fs-h4);
+    line-height: 1.1;
+}
+
+.guia-cabecalho__sub {
+    font-size: var(--fs-pequeno);
+    opacity: 0.85;
+}
+
+.guia-cabecalho a {
+    color: var(--cor-branco);
+    font-weight: var(--peso-medio);
+    font-size: var(--fs-pequeno);
+}
+
+.guia-intro {
+    padding-block: var(--esp-6) var(--esp-4);
+}
+
+.guia-intro h1 {
+    margin-bottom: var(--esp-2);
+}
+
+.guia-intro p {
+    max-width: 68ch;
+    color: var(--cor-texto-suave);
+}
+
+.guia-secao {
+    margin-bottom: var(--esp-5);
+    padding: var(--esp-4);
+    border-radius: var(--raio-grande);
+    background-color: var(--cor-branco);
+    box-shadow: var(--sombra-1);
+}
+
+@media (min-width: 768px) {
+    .guia-secao {
+        padding: var(--esp-5);
+    }
+}
+
+.guia-secao__titulo {
+    display: flex;
+    align-items: center;
+    gap: var(--esp-2);
+    font-size: var(--fs-h3);
+    margin-bottom: var(--esp-2);
+}
+
+.guia-secao__numero {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--cor-primaria);
+    color: var(--cor-branco);
+    font-size: var(--fs-base);
+}
+
+.guia-secao__descricao {
+    margin-bottom: var(--esp-4);
+    color: var(--cor-texto-suave);
+}
+
+.guia-grupo + .guia-grupo {
+    margin-top: var(--esp-4);
+}
+
+.guia-grupo__titulo {
+    font-family: var(--fonte-texto);
+    font-size: var(--fs-pequeno);
+    font-weight: var(--peso-medio);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--cor-texto-suave);
+    margin-bottom: var(--esp-2);
+}
+
+.guia-codigo {
+    font-family: Consolas, 'Courier New', monospace;
+    font-size: 0.8125rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background-color: var(--cor-neutra-clara);
+    color: var(--cor-primaria-escura);
+}
+
+.guia-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--esp-2);
+}
+
+/* Vitrine: área cinza onde os componentes aparecem em estado fixo */
+.vitrine {
+    display: flex;
+    flex-direction: column;
+    gap: var(--esp-3);
+    padding: var(--esp-4);
+    border: 1px dashed var(--cor-borda);
+    border-radius: var(--raio-borda);
+    background-color: var(--cor-fundo-alt);
+}
+
+@media (min-width: 768px) {
+    .vitrine--toasts {
+        max-width: 420px;
+    }
+}
+
+/* Grade dos cards de exemplo (o card em si fica em components.css) */
+.grid-cards {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--gutter);
+}
+
+.grid-cards > * {
+    grid-column: span 12;
+}
+
+@media (min-width: 768px) {
+    .grid-cards > * { grid-column: span 6; }
+}
+
+@media (min-width: 992px) {
+    .grid-cards > * { grid-column: span 4; }
+}
+
+.guia-rodape {
+    padding-block: var(--esp-5);
+    text-align: center;
+    font-size: var(--fs-pequeno);
+    color: var(--cor-texto-suave);
+}
