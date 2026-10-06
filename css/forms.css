@@ -1,0 +1,228 @@
+/* ==========================================================================
+   FORMULÁRIOS - campos, estados de validação e opções
+   ========================================================================== */
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--esp-4);
+}
+
+.form__legenda-obrigatorio {
+    font-size: var(--fs-pequeno);
+    color: var(--cor-texto-suave);
+}
+
+.form__secao {
+    padding: var(--esp-4);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-grande);
+    background-color: var(--cor-branco);
+    row-gap: var(--esp-3);
+}
+
+.form__secao legend {
+    padding-inline: var(--esp-2);
+    font-family: var(--fonte-titulo);
+    font-size: var(--fs-h4);
+    font-weight: var(--peso-negrito);
+}
+
+.form__grupo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--esp-1);
+}
+
+.form__rotulo {
+    font-weight: var(--peso-medio);
+    font-size: var(--fs-pequeno);
+    transition: color var(--transicao);
+}
+
+.form__grupo:focus-within .form__rotulo {
+    color: var(--cor-destaque);
+}
+
+.form__obrigatorio {
+    color: var(--cor-erro);
+}
+
+.form__campo {
+    width: 100%;
+    min-height: 44px;
+    padding: var(--esp-2) var(--esp-3);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-borda);
+    background-color: var(--cor-branco);
+    color: var(--cor-texto);
+    font: inherit;
+    transition: border-color var(--transicao), box-shadow var(--transicao), background-color var(--transicao);
+}
+
+textarea.form__campo {
+    resize: vertical;
+}
+
+.form__campo::placeholder {
+    color: var(--cor-texto-suave);
+    opacity: 0.8;
+}
+
+.form__campo:hover {
+    border-color: var(--cor-texto-suave);
+}
+
+.form__campo:focus {
+    outline: none;
+    border-color: var(--cor-destaque);
+    box-shadow: 0 0 0 3px rgba(47, 93, 168, 0.25);
+}
+
+/* ---------- Validação ---------- */
+.form__campo[aria-invalid="true"] {
+    border-color: var(--cor-erro);
+    background-color: var(--cor-erro-clara);
+}
+
+.form__campo[aria-invalid="true"]:focus {
+    box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.2);
+}
+
+.form__campo--valido {
+    border-color: var(--cor-primaria);
+    padding-right: 2.5rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231B6B4F' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 5 5 9-10'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1.1rem;
+}
+
+select.form__campo--valido {
+    background-position: right 2rem center;
+}
+
+.form__erro {
+    display: flex;
+    align-items: center;
+    gap: var(--esp-1);
+    font-size: var(--fs-pequeno);
+    font-weight: var(--peso-medio);
+    color: var(--cor-erro);
+}
+
+.form__erro[hidden] {
+    display: none;
+}
+
+.form__erro::before {
+    content: "!";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background-color: var(--cor-erro);
+    color: var(--cor-branco);
+    font-size: 0.75rem;
+    font-weight: var(--peso-negrito);
+}
+
+.form__dica {
+    font-size: var(--fs-pequeno);
+    color: var(--cor-texto-suave);
+}
+
+.form__contador {
+    text-align: right;
+}
+
+/* ---------- Checkbox e ações ---------- */
+.form__opcao {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--esp-2);
+    cursor: pointer;
+}
+
+.form__opcao input {
+    width: 20px;
+    height: 20px;
+    margin-top: 3px;
+    flex-shrink: 0;
+    accent-color: var(--cor-primaria);
+}
+
+.form__opcao input[aria-invalid="true"] {
+    outline: 2px solid var(--cor-erro);
+    outline-offset: 2px;
+}
+
+.form__acoes {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: var(--esp-3);
+}
+
+@media (min-width: 576px) {
+    .form__acoes {
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+}
+
+/* ---------- Opções de valor (radios em formato de botão) ---------- */
+.opcoes-valor {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--esp-2);
+    border: none;
+}
+
+.opcoes-valor legend {
+    margin-bottom: var(--esp-2);
+}
+
+.opcoes-valor label {
+    position: relative;
+}
+
+.opcoes-valor input {
+    position: absolute;
+    opacity: 0;
+}
+
+.opcoes-valor span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    border: 2px solid var(--cor-borda);
+    border-radius: var(--raio-borda);
+    font-weight: var(--peso-medio);
+    cursor: pointer;
+    transition: border-color var(--transicao), background-color var(--transicao);
+}
+
+.opcoes-valor span:hover {
+    border-color: var(--cor-primaria);
+}
+
+.opcoes-valor input:checked + span {
+    border-color: var(--cor-primaria);
+    background-color: var(--cor-sucesso-clara);
+    color: var(--cor-primaria-escura);
+}
+
+.opcoes-valor input:focus-visible + span {
+    outline: 3px solid var(--cor-destaque);
+    outline-offset: 2px;
+}
+
+@media (min-width: 576px) {
+    .opcoes-valor {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
