@@ -1,0 +1,125 @@
+/* ==========================================================================
+   BOTÕES - repouso → hover → focus → active → disabled
+   ========================================================================== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--esp-2);
+    min-height: 44px;
+    padding: var(--esp-2) var(--esp-4);
+    border: 2px solid transparent;
+    border-radius: var(--raio-borda);
+    font-family: var(--fonte-texto);
+    font-size: var(--fs-base);
+    font-weight: var(--peso-medio);
+    line-height: 1.2;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color var(--transicao), box-shadow var(--transicao),
+                transform 0.1s ease, border-color var(--transicao), color var(--transicao);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn:focus-visible {
+    outline: 3px solid var(--cor-destaque);
+    outline-offset: 3px;
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn:disabled,
+.btn[aria-disabled="true"] {
+    background-color: var(--cor-borda);
+    border-color: var(--cor-borda);
+    color: var(--cor-texto-suave);
+    opacity: 0.6;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    pointer-events: none;
+}
+
+/* ---------- Variantes ---------- */
+.btn--primario {
+    background-color: var(--cor-primaria);
+    color: var(--cor-branco);
+}
+
+.btn--primario:hover {
+    background-color: var(--cor-primaria-escura);
+    box-shadow: 0 4px 12px rgba(27, 107, 79, 0.3);
+}
+
+.btn--doar {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-texto);
+}
+
+.btn--doar:hover {
+    background-color: var(--cor-secundaria-escura);
+    box-shadow: 0 4px 12px rgba(217, 138, 31, 0.35);
+}
+
+.btn--contorno {
+    background-color: transparent;
+    border-color: var(--cor-primaria);
+    color: var(--cor-primaria);
+}
+
+.btn--contorno:hover {
+    background-color: var(--cor-primaria);
+    color: var(--cor-branco);
+}
+
+.btn--erro {
+    background-color: var(--cor-erro);
+    color: var(--cor-branco);
+}
+
+.btn--erro:hover {
+    background-color: #A61F1F;
+    box-shadow: 0 4px 12px rgba(198, 40, 40, 0.3);
+}
+
+.btn--info {
+    background-color: var(--cor-destaque);
+    color: var(--cor-branco);
+}
+
+.btn--info:hover {
+    background-color: #244A87;
+    box-shadow: 0 4px 12px rgba(47, 93, 168, 0.3);
+}
+
+.btn--bloco {
+    width: 100%;
+}
+
+/* Botão só com ícone (fechar) */
+.btn-fechar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    border: none;
+    border-radius: var(--raio-borda);
+    background: transparent;
+    color: var(--cor-texto-suave);
+    cursor: pointer;
+    transition: background-color var(--transicao), color var(--transicao);
+}
+
+.btn-fechar:hover {
+    background-color: rgba(31, 41, 55, 0.08);
+    color: var(--cor-texto);
+}
