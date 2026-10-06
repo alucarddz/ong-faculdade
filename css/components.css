@@ -1,0 +1,396 @@
+/* ==========================================================================
+   COMPONENTES DE CONTEÚDO - cards, meta de doação, filtros, blocos e listas
+   ========================================================================== */
+
+/* ---------- Card de projeto ---------- */
+.card-projeto {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-grande);
+    background-color: var(--cor-branco);
+    transition: box-shadow var(--transicao), transform var(--transicao);
+}
+
+.card-projeto:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra-2);
+}
+
+.card-projeto__midia {
+    position: relative;
+    display: block;
+}
+
+.card-projeto__midia img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.card-projeto__midia .badge {
+    position: absolute;
+    top: var(--esp-3);
+    left: var(--esp-3);
+    box-shadow: var(--sombra-1);
+}
+
+.card-projeto__corpo {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: var(--esp-3);
+    padding: var(--esp-4);
+}
+
+.card-projeto__titulo {
+    font-size: var(--fs-h4);
+}
+
+.card-projeto__titulo a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.card-projeto__titulo a:hover {
+    color: var(--cor-primaria);
+    text-decoration: underline;
+}
+
+.card-projeto__texto {
+    font-size: var(--fs-pequeno);
+    color: var(--cor-texto-suave);
+}
+
+.card-projeto__botao {
+    margin-top: auto;
+}
+
+/* ---------- Barra de meta de arrecadação ---------- */
+.meta-doacao {
+    display: flex;
+    flex-direction: column;
+    gap: var(--esp-1);
+}
+
+.meta-doacao__info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--esp-1);
+    font-size: var(--fs-pequeno);
+}
+
+.meta-doacao__porcentagem {
+    font-weight: var(--peso-negrito);
+    color: var(--cor-primaria);
+}
+
+.meta-doacao__barra {
+    display: flex;
+    height: 8px;
+    overflow: hidden;
+    border-radius: var(--raio-pilula);
+    background-color: var(--cor-neutra-clara);
+}
+
+.meta-doacao__preenchimento {
+    border-radius: var(--raio-pilula);
+    background-color: var(--cor-primaria);
+    transition: flex-basis 0.6s ease;
+}
+
+/* ---------- Filtros ---------- */
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--esp-2);
+    margin-bottom: var(--esp-2);
+}
+
+.filtro {
+    min-height: 40px;
+    padding: var(--esp-1) var(--esp-4);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-pilula);
+    background-color: var(--cor-branco);
+    color: var(--cor-texto);
+    font: inherit;
+    font-weight: var(--peso-medio);
+    font-size: var(--fs-pequeno);
+    cursor: pointer;
+    transition: background-color var(--transicao), border-color var(--transicao), color var(--transicao);
+}
+
+.filtro:hover {
+    border-color: var(--cor-primaria);
+    color: var(--cor-primaria);
+}
+
+.filtro[aria-pressed="true"] {
+    border-color: var(--cor-primaria);
+    background-color: var(--cor-primaria);
+    color: var(--cor-branco);
+}
+
+.filtros__contador {
+    margin-bottom: var(--esp-4);
+    font-size: var(--fs-pequeno);
+    color: var(--cor-texto-suave);
+}
+
+/* ---------- Estatísticas ---------- */
+.estatisticas {
+    list-style: none;
+}
+
+.estatistica {
+    display: flex;
+    flex-direction: column;
+    gap: var(--esp-1);
+    padding: var(--esp-4);
+    border-left: 4px solid var(--cor-secundaria);
+    border-radius: var(--raio-borda);
+    background-color: var(--cor-fundo-alt);
+}
+
+.estatistica strong {
+    font-family: var(--fonte-titulo);
+    font-size: var(--fs-h2);
+    line-height: 1;
+    color: var(--cor-primaria);
+}
+
+.estatistica span {
+    color: var(--cor-texto-suave);
+}
+
+/* ---------- Blocos de conteúdo e listas ---------- */
+.bloco {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--esp-3);
+    padding: var(--esp-4);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-grande);
+    background-color: var(--cor-branco);
+}
+
+.bloco h3 {
+    font-size: var(--fs-h4);
+}
+
+.lista-marcada {
+    display: flex;
+    flex-direction: column;
+    gap: var(--esp-2);
+    padding-left: var(--esp-4);
+}
+
+.lista-marcada li::marker {
+    color: var(--cor-primaria);
+}
+
+.passos {
+    display: flex;
+    flex-direction: column;
+    gap: var(--esp-3);
+    list-style: none;
+    counter-reset: passo;
+}
+
+.passos li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--esp-3);
+    counter-increment: passo;
+}
+
+.passos li::before {
+    content: counter(passo);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background-color: var(--cor-primaria);
+    color: var(--cor-branco);
+    font-weight: var(--peso-negrito);
+}
+
+/* ---------- Detalhe do projeto ---------- */
+.link-voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--esp-2);
+    min-height: 44px;
+    margin-bottom: var(--esp-3);
+    font-weight: var(--peso-medio);
+    text-decoration: none;
+}
+
+.link-voltar:hover {
+    text-decoration: underline;
+}
+
+.detalhe {
+    align-items: center;
+    margin-bottom: var(--esp-5);
+}
+
+.detalhe__imagem {
+    aspect-ratio: 16 / 10;
+}
+
+.detalhe__info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--esp-3);
+}
+
+.detalhe__resumo {
+    font-size: var(--fs-h4);
+    color: var(--cor-texto-suave);
+}
+
+.detalhe__voluntarios {
+    display: flex;
+    align-items: center;
+    gap: var(--esp-2);
+    color: var(--cor-texto-suave);
+}
+
+.detalhe__voluntarios .icone {
+    color: var(--cor-primaria);
+}
+
+.detalhe__descricao {
+    max-width: 75ch;
+}
+
+/* ---------- Cadastros salvos ---------- */
+.cadastros {
+    position: sticky;
+    top: calc(72px + var(--esp-4));
+}
+
+.cadastros__titulo {
+    font-size: var(--fs-h4);
+}
+
+.cadastros__descricao,
+.cadastros__vazio {
+    font-size: var(--fs-pequeno);
+    color: var(--cor-texto-suave);
+}
+
+#lista-cadastros {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--esp-3);
+    width: 100%;
+}
+
+.cadastros__lista {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    list-style: none;
+}
+
+.cadastros__item {
+    display: flex;
+    flex-direction: column;
+    padding-block: var(--esp-2);
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.cadastros__nome {
+    font-weight: var(--peso-medio);
+}
+
+.cadastros__detalhe,
+.cadastros__data {
+    font-size: var(--fs-pequeno);
+    color: var(--cor-texto-suave);
+}
+
+/* ---------- 404 ---------- */
+.nao-encontrada {
+    text-align: center;
+}
+
+.nao-encontrada .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--esp-3);
+}
+
+.nao-encontrada__codigo {
+    font-family: var(--fonte-titulo);
+    font-size: 5rem;
+    font-weight: var(--peso-negrito);
+    line-height: 1;
+    color: var(--cor-secundaria);
+}
+
+/* ---------- Gráficos (Chart.js) ---------- */
+.grafico {
+    margin: 0;
+    align-items: stretch;
+}
+
+.grafico__titulo {
+    font-family: var(--fonte-titulo);
+    font-size: var(--fs-h4);
+    font-weight: var(--peso-negrito);
+}
+
+/* O Chart.js ocupa 100% deste contêiner (maintainAspectRatio: false) */
+.grafico__area {
+    position: relative;
+    height: 280px;
+}
+
+.grafico__status {
+    font-size: var(--fs-pequeno);
+    color: var(--cor-texto-suave);
+}
+
+.grafico__dados summary {
+    font-size: var(--fs-pequeno);
+    font-weight: var(--peso-medio);
+    color: var(--cor-destaque);
+    cursor: pointer;
+}
+
+.tabela {
+    width: 100%;
+    margin-top: var(--esp-2);
+    border-collapse: collapse;
+    font-size: var(--fs-pequeno);
+}
+
+.tabela th,
+.tabela td {
+    padding: var(--esp-2);
+    border-bottom: 1px solid var(--cor-borda);
+    text-align: left;
+}
+
+.tabela td {
+    font-variant-numeric: tabular-nums;
+}
+
+.tabela thead th {
+    color: var(--cor-texto-suave);
+    font-weight: var(--peso-medio);
+}
