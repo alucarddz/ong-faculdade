@@ -5,6 +5,11 @@ Plataforma web para uma organização do terceiro setor divulgar seus projetos, 
 
 Projeto acadêmico da disciplina de Desenvolvimento Front-end.
 
+**Site publicado:** https://alucarddz.github.io/ong-faculdade/
+
+[![CI](https://github.com/alucarddz/ong-faculdade/actions/workflows/ci.yml/badge.svg)](https://github.com/alucarddz/ong-faculdade/actions/workflows/ci.yml)
+[![Deploy](https://github.com/alucarddz/ong-faculdade/actions/workflows/deploy.yml/badge.svg)](https://github.com/alucarddz/ong-faculdade/actions/workflows/deploy.yml)
+
 ## Sumário
 
 - [Funcionalidades](#funcionalidades)
@@ -12,6 +17,7 @@ Projeto acadêmico da disciplina de Desenvolvimento Front-end.
 - [Pré-requisitos](#pré-requisitos)
 - [Instalação e execução](#instalação-e-execução)
 - [Build](#build)
+- [Deploy e CI/CD](#deploy-e-cicd)
 - [Imagens](#imagens)
 - [Testes](#testes)
 - [Estrutura de pastas](#estrutura-de-pastas)
@@ -94,6 +100,18 @@ O `vite.config.js` define:
 | Total com gzip | 43,5 KB | 28,6 KB | 34% |
 
 A página inicial passa de 22 requisições de CSS e JS (8 + 14) para 3.
+
+## Deploy e CI/CD
+
+O site é hospedado no **GitHub Pages** e publicado pelo **GitHub Actions**:
+
+| Workflow | Quando roda | O que faz |
+|---|---|---|
+| `.github/workflows/ci.yml` | Todo pull request para `develop` ou `main` e todo push na `develop` | `npm ci`, `npm test` e `npm run build`: o PR só deve ser mesclado com o check verde |
+| `.github/workflows/deploy.yml` | Todo push na `main` (ou manualmente) | Testa, gera a build e publica a pasta `dist/` no Pages; se um teste falhar, nada é publicado |
+
+Como só versões fechadas chegam à `main` (via `release/*` ou `hotfix/*`), cada release vira automaticamente uma publicação.
+A raiz do site redireciona para `html/index.html`.
 
 ## Imagens
 

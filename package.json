@@ -1,6 +1,6 @@
 {
   "name": "ong-faculdade",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "SPA para ONG: projetos, doações e voluntariado (HTML, CSS e JavaScript puro)",
   "private": true,
   "type": "module",
