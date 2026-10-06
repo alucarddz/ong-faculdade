@@ -1,7 +1,7 @@
 # ONG Faculdade
 
 Plataforma web para uma organização do terceiro setor divulgar seus projetos, receber doações e cadastrar voluntários.
-É uma **Single Page Application (SPA)** feita com HTML, CSS e JavaScript puro (ES Modules), sem framework e sem etapa de build.
+É uma **Single Page Application (SPA)** feita com HTML, CSS e JavaScript puro (ES Modules), sem framework. Em desenvolvimento roda direto no navegador; para produção, o Vite gera uma build minificada.
 
 Projeto acadêmico da disciplina de Desenvolvimento Front-end.
 
@@ -40,9 +40,11 @@ Projeto acadêmico da disciplina de Desenvolvimento Front-end.
 | JavaScript (ES2022) | ES Modules, manipulação do DOM, eventos, `localStorage` |
 | [Chart.js 4](https://www.chartjs.org/) | Gráficos, carregado via CDN (jsDelivr) com `import()` dinâmico |
 | Google Fonts | Fontes Poppins (títulos) e Inter (textos) |
-| Node.js | Apenas para o servidor local (`npm start`) e os testes (`npm test`) |
+| Node.js | Servidor local (`npm start`), testes (`npm test`) e build (`npm run build`) |
+| [Vite 8](https://vite.dev/) | Build de produção: empacota os módulos e minifica CSS e JS |
+| [html-minifier-terser](https://github.com/terser/html-minifier-terser) | Minificação do HTML durante a build |
 
-O projeto **não tem dependências npm**: o servidor e os testes usam só módulos nativos do Node.
+O site não tem dependências em tempo de execução. As únicas dependências npm são de desenvolvimento (Vite e html-minifier-terser), usadas apenas na build; o servidor local e os testes usam só módulos nativos do Node.
 
 ## Pré-requisitos
 
@@ -60,15 +62,37 @@ npm start
 
 Acesse **http://localhost:5500** (redireciona para `html/index.html`). Para usar outra porta: `PORTA=8080 npm start`.
 
-Não é preciso rodar `npm install`, porque não há dependências.
+Para desenvolver e testar não é preciso rodar `npm install`. Ele só é necessário para gerar a build.
 
 > **Por que um servidor?** Os scripts são ES Modules, e o navegador bloqueia módulos abertos direto do disco (`file://`).
 > Alternativa no VS Code: botão direito em `html/index.html` → **Open with Five Server** (ou Live Server).
 
 ## Build
 
-Não existe etapa de build: o navegador executa os ES Modules diretamente, sem bundler nem transpilação.
-Para publicar, basta enviar a pasta do projeto para qualquer hospedagem estática (GitHub Pages, Netlify, Vercel).
+```bash
+npm install        # instala Vite e html-minifier-terser (dependências de desenvolvimento)
+npm run build      # gera a pasta dist/
+npm run preview    # serve a build em http://localhost:4173/html/index.html
+```
+
+O `vite.config.js` define:
+
+- as duas páginas de entrada (`html/index.html` e `html/componentes.html`)
+- `base: './'`, para a build funcionar em qualquer pasta (ex.: GitHub Pages)
+- o Chart.js como dependência externa, continuando a vir do CDN sob demanda
+- um plugin que minifica o HTML (o Vite só minifica CSS e JS)
+- um plugin que copia `imagens/`, porque os caminhos das fotos dos projetos estão em strings no JavaScript
+
+| | Fonte | Build | Redução |
+|---|---|---|---|
+| HTML (2 páginas) | 31,1 KB | 20,6 KB | 34% |
+| CSS (9 arquivos → 3) | 51,5 KB | 34,4 KB | 33% |
+| JS (14 módulos → 3) | 65,9 KB | 43,9 KB | 33% |
+| **Total** | **148,4 KB** | **98,9 KB** | **33%** |
+| Total com gzip | 43,5 KB | 28,6 KB | 34% |
+
+A página inicial passa de 22 requisições de CSS e JS (8 + 14) para 3.
+Para publicar, envie a pasta `dist/` para qualquer hospedagem estática (GitHub Pages, Netlify, Vercel).
 Como o roteamento usa hash, nenhuma configuração de redirecionamento no servidor é necessária.
 
 ## Testes
@@ -114,7 +138,8 @@ ong-faculdade/
 │   └── views/              # uma tela por arquivo
 ├── scripts/servidor.js     # servidor local de desenvolvimento
 ├── tests/                  # testes automatizados
-└── package.json            # scripts npm start e npm test
+├── vite.config.js          # configuração da build de produção
+└── package.json            # scripts start, build, preview e test
 ```
 
 ## Arquitetura
