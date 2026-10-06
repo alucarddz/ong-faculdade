@@ -1,0 +1,88 @@
+/* ==========================================================================
+   DESIGN SYSTEM - ONG Faculdade
+   Todas as cores, fontes e espaçamentos do projeto partem daqui.
+   ========================================================================== */
+
+:root {
+    /* ---------- Cores primárias ---------- */
+    --cor-primaria: #1B6B4F;          /* verde: identidade, botões principais */
+    --cor-primaria-escura: #124A37;   /* hover / foco / rodapé */
+
+    /* ---------- Cores secundárias ---------- */
+    --cor-secundaria: #F2A33A;        /* âmbar: chamadas de doação */
+    --cor-secundaria-escura: #D98A1F; /* hover do botão de doação */
+    --cor-destaque: #2F5DA8;          /* azul: links, foco e informações */
+    --cor-erro: #C62828;              /* validação e alertas de erro */
+
+    /* ---------- Neutras ---------- */
+    --cor-texto: #1F2937;
+    --cor-texto-suave: #4B5563;
+    --cor-borda: #D1D5DB;
+    --cor-fundo-alt: #F5F7F6;
+    --cor-branco: #FFFFFF;
+
+    /* ---------- Tons de feedback (fundos claros) ---------- */
+    --cor-sucesso-clara: #E8F3EE;
+    --cor-erro-clara: #FDECEC;
+    --cor-aviso-clara: #FEF4E6;
+    --cor-aviso-texto: #8A5300;
+    --cor-info-clara: #EAF0F9;
+    --cor-neutra-clara: #EEF0F2;
+
+    /* ---------- Gráficos (validados para contraste e daltonismo) ---------- */
+    --grafico-1: #1E7D52;
+    --grafico-2: #C27812;
+    --grafico-3: #2F5DA8;
+    --grafico-grade: #E5E7EB;
+
+    /* ---------- Tipografia (escala 1.25, base 16px) ---------- */
+    --fonte-titulo: 'Poppins', sans-serif;
+    --fonte-texto: 'Inter', sans-serif;
+
+    --fs-h1: clamp(1.953rem, 4vw, 2.441rem);
+    --fs-h2: 1.953rem;
+    --fs-h3: 1.563rem;
+    --fs-h4: 1.25rem;
+    --fs-base: 1rem;
+    --fs-pequeno: 0.875rem;
+
+    --peso-regular: 400;
+    --peso-medio: 600;
+    --peso-negrito: 700;
+
+    --lh-titulo: 1.2;
+    --lh-texto: 1.6;
+
+    /* ---------- Espaçamentos (base 8px) ---------- */
+    --esp-1: 0.25rem;  /*  4px */
+    --esp-2: 0.5rem;   /*  8px */
+    --esp-3: 1rem;     /* 16px */
+    --esp-4: 1.5rem;   /* 24px */
+    --esp-5: 2rem;     /* 32px */
+    --esp-6: 3rem;     /* 48px */
+    --esp-7: 4rem;     /* 64px */
+
+    /* ---------- Estrutura ---------- */
+    --raio-borda: 8px;
+    --raio-grande: 12px;
+    --raio-pilula: 999px;
+    --container-max: 1200px;
+    --gutter: var(--esp-4);
+
+    /* ---------- Sombras ---------- */
+    --sombra-1: 0 1px 3px rgba(31, 41, 55, 0.12);
+    --sombra-2: 0 8px 24px rgba(31, 41, 55, 0.16);
+    --sombra-3: 0 20px 48px rgba(31, 41, 55, 0.28);
+
+    /* ---------- Movimento e camadas ---------- */
+    --transicao: 0.2s ease;
+    --z-header: 200;
+    --z-toast: 300;
+    --z-modal: 400;
+}
+
+@media (min-width: 1400px) {
+    :root {
+        --container-max: 1320px;
+    }
+}
