@@ -94,3 +94,69 @@ a {
         scroll-behavior: auto !important;
     }
 }
+
+/* ==========================================================================
+   REFORÇOS DO TEMA DE ALTO CONTRASTE
+   Além das cores (em variables.css), a forma também muda: bordas mais grossas,
+   links sempre sublinhados e foco mais visível, para não depender só da cor.
+   ========================================================================== */
+[data-tema="alto-contraste"] a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+[data-tema="alto-contraste"] :focus-visible {
+    outline-width: 4px;
+    outline-offset: 3px;
+}
+
+[data-tema="alto-contraste"] .card-projeto,
+[data-tema="alto-contraste"] .bloco,
+[data-tema="alto-contraste"] .form__secao,
+[data-tema="alto-contraste"] .modal,
+[data-tema="alto-contraste"] .toast,
+[data-tema="alto-contraste"] .header {
+    border: 2px solid var(--cor-borda);
+}
+
+[data-tema="alto-contraste"] .badge,
+[data-tema="alto-contraste"] .alerta {
+    border: 1px solid currentColor;
+}
+
+[data-tema="alto-contraste"] .meta-doacao__barra {
+    border: 1px solid var(--cor-borda);
+}
+
+/* ==========================================================================
+   MODO DE CORES FORÇADAS (alto contraste do Windows)
+   O sistema substitui todas as cores. Fundos somem, então os componentes que
+   dependem de fundo ganham bordas, e a barra de progresso usa a cor do sistema.
+   ========================================================================== */
+@media (forced-colors: active) {
+    .btn,
+    .badge,
+    .alerta,
+    .toast,
+    .filtro,
+    .card-projeto,
+    .bloco {
+        border: 1px solid CanvasText;
+    }
+
+    .filtro[aria-pressed="true"],
+    .opcoes-valor input:checked + span {
+        border-width: 3px;
+    }
+
+    .meta-doacao__barra {
+        border: 1px solid CanvasText;
+    }
+
+    .meta-doacao__preenchimento,
+    .badge__ponto,
+    .nav__toggle-linha {
+        forced-color-adjust: none;
+        background-color: Highlight;
+    }
+}

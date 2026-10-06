@@ -2,6 +2,7 @@
 
 import { iniciarRoteador } from './modules/router.js';
 import { iniciarAlertas, iniciarModalDoacao } from './modules/feedback.js';
+import { iniciarTemas } from './modules/temas.js';
 import { PROJETOS } from './data/projetos.js';
 import { escapar } from './modules/templates.js';
 import { inicio } from './views/inicio.js';
@@ -76,6 +77,7 @@ function iniciarLinkDePulo() {
     });
 }
 
+iniciarTemas(document.getElementById('seletor-tema'));
 iniciarMenu();
 iniciarLinkDePulo();
 iniciarAlertas();

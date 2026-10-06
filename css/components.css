@@ -10,7 +10,7 @@
     overflow: hidden;
     border: 1px solid var(--cor-borda);
     border-radius: var(--raio-grande);
-    background-color: var(--cor-branco);
+    background-color: var(--cor-superficie);
     transition: box-shadow var(--transicao), transform var(--transicao);
 }
 
@@ -116,7 +116,7 @@
     padding: var(--esp-1) var(--esp-4);
     border: 1px solid var(--cor-borda);
     border-radius: var(--raio-pilula);
-    background-color: var(--cor-branco);
+    background-color: var(--cor-superficie);
     color: var(--cor-texto);
     font: inherit;
     font-weight: var(--peso-medio);
@@ -133,7 +133,7 @@
 .filtro[aria-pressed="true"] {
     border-color: var(--cor-primaria);
     background-color: var(--cor-primaria);
-    color: var(--cor-branco);
+    color: var(--cor-sobre-cor);
 }
 
 .filtros__contador {
@@ -177,7 +177,7 @@
     padding: var(--esp-4);
     border: 1px solid var(--cor-borda);
     border-radius: var(--raio-grande);
-    background-color: var(--cor-branco);
+    background-color: var(--cor-superficie);
 }
 
 .bloco h3 {
@@ -220,7 +220,7 @@
     flex-shrink: 0;
     border-radius: 50%;
     background-color: var(--cor-primaria);
-    color: var(--cor-branco);
+    color: var(--cor-sobre-cor);
     font-weight: var(--peso-negrito);
 }
 

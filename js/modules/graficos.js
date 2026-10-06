@@ -7,8 +7,12 @@ const URL_CHART_JS = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/+esm';
 let carregamento = null;
 const graficosAtivos = new Set();
 
-// Lê as cores do Design System direto das variáveis CSS
+// Lê as cores do Design System direto das variáveis CSS (mudam conforme o tema)
 const token = (nome) => getComputedStyle(document.documentElement).getPropertyValue(nome).trim();
+
+// As cores são passadas como funções ("opções scriptable" do Chart.js): a biblioteca
+// as reavalia a cada update(), então trocar o tema não exige recriar o gráfico.
+const cor = (nome) => () => token(nome);
 
 function carregarChart() {
     // Guarda a Promise: várias chamadas reaproveitam o mesmo download
@@ -17,8 +21,9 @@ function carregarChart() {
 
         Chart.defaults.font.family = "'Inter', sans-serif";
         Chart.defaults.font.size = 13;
-        Chart.defaults.color = token('--cor-texto-suave');
         Chart.defaults.maintainAspectRatio = false;
+        // As cores vêm do Design System, nunca da paleta automática da biblioteca
+        Chart.defaults.plugins.colors.enabled = false;
         // Respeita quem pediu menos animação no sistema operacional
         Chart.defaults.animation = window.matchMedia('(prefers-reduced-motion: reduce)').matches
             ? false
@@ -43,6 +48,12 @@ function limparGraficosAntigos() {
     });
 }
 
+// O canvas não lê CSS: ao trocar de tema, os gráficos são redesenhados com as novas cores
+document.addEventListener('tema:mudou', () => {
+    limparGraficosAntigos();
+    graficosAtivos.forEach((grafico) => grafico.update('none'));
+});
+
 async function criarGrafico(canvas, configuracao) {
     const Chart = await carregarChart();
     limparGraficosAntigos();
@@ -65,7 +76,7 @@ export function graficoArrecadacao(canvas, projetos) {
             datasets: [{
                 label: '% da meta',
                 data: porcentagens,
-                backgroundColor: token('--grafico-1'),
+                backgroundColor: cor('--grafico-1'),
                 borderRadius: 4,
                 barThickness: 22,
             }],
@@ -76,11 +87,15 @@ export function graficoArrecadacao(canvas, projetos) {
                 x: {
                     min: 0,
                     max: 100,
-                    ticks: { callback: (valor) => `${valor}%` },
-                    grid: { color: token('--grafico-grade') },
+                    ticks: { callback: (valor) => `${valor}%`, color: cor('--cor-texto-suave') },
+                    grid: { color: cor('--grafico-grade') },
                     border: { display: false },
                 },
-                y: { grid: { display: false }, border: { display: false } },
+                y: {
+                    ticks: { color: cor('--cor-texto') },
+                    grid: { display: false },
+                    border: { display: false },
+                },
             },
             plugins: {
                 legend: { display: false }, // série única: o título já identifica
@@ -99,14 +114,16 @@ export function graficoArrecadacao(canvas, projetos) {
 
 // Rosca: para onde vai cada real doado
 export function graficoDestinoRecursos(canvas, fatias) {
+    const CORES_FATIAS = ['--grafico-1', '--grafico-3', '--grafico-2'];
+
     return criarGrafico(canvas, {
         type: 'doughnut',
         data: {
             labels: fatias.map((f) => f.rotulo),
             datasets: [{
                 data: fatias.map((f) => f.valor),
-                backgroundColor: [token('--grafico-1'), token('--grafico-3'), token('--grafico-2')],
-                borderColor: token('--cor-branco'),
+                backgroundColor: (contexto) => token(CORES_FATIAS[contexto.dataIndex]),
+                borderColor: cor('--cor-superficie'),
                 borderWidth: 2, // separa as fatias
                 hoverOffset: 6,
             }],
@@ -118,13 +135,14 @@ export function graficoDestinoRecursos(canvas, fatias) {
                     position: 'bottom',
                     labels: {
                         usePointStyle: true,
-                        color: token('--cor-texto'),
                         padding: 16,
-                        // A legenda mostra o valor, então a cor nunca é a única pista
-                        generateLabels: (grafico) => grafico.data.labels.map((rotulo, i) => ({
-                            text: `${rotulo}: ${fatias[i].valor}%`,
-                            fillStyle: grafico.data.datasets[0].backgroundColor[i],
-                            strokeStyle: grafico.data.datasets[0].backgroundColor[i],
+                        // Gerada a cada update: acompanha o tema. A legenda mostra o valor,
+                        // então a cor nunca é a única pista
+                        generateLabels: () => fatias.map((fatia, i) => ({
+                            text: `${fatia.rotulo}: ${fatia.valor}%`,
+                            fillStyle: token(CORES_FATIAS[i]),
+                            strokeStyle: token(CORES_FATIAS[i]),
+                            fontColor: token('--cor-texto'),
                             pointStyle: 'circle',
                             index: i,
                         })),
