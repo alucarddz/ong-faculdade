@@ -1,7 +1,7 @@
 // Tela inicial (#/inicio)
 
 import { PROJETOS } from '../data/projetos.js';
-import { cardProjeto, icone } from '../modules/templates.js';
+import { cardProjeto, foto, icone, TAMANHOS } from '../modules/templates.js';
 import { listarCadastros } from '../modules/storage.js';
 
 export const inicio = {
@@ -23,7 +23,7 @@ export const inicio = {
                         </div>
                     </div>
                     <div class="col-12 col-lg-6">
-                        <img class="hero__imagem" src="../imagens/hero-voluntarios.jpg" alt="Voluntários unidos em ação comunitária">
+                        ${foto('hero-voluntarios', { classe: 'hero__imagem', alt: 'Voluntários unidos em ação comunitária', sizes: TAMANHOS.metade, prioridade: true })}
                     </div>
                 </div>
             </section>
@@ -58,7 +58,7 @@ export const inicio = {
             <section class="secao">
                 <div class="container grid">
                     <div class="col-12 col-lg-5">
-                        <img class="imagem-arredondada" src="../imagens/hero-voluntarios.jpg" alt="Equipe de apoiadores da ONG">
+                        ${foto('hero-voluntarios', { classe: 'imagem-arredondada', alt: 'Equipe de apoiadores da ONG', sizes: TAMANHOS.sobre })}
                     </div>
                     <div class="col-12 col-lg-7 sobre">
                         <h2>Sobre a ONG</h2>

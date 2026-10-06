@@ -16,7 +16,11 @@ function copiarImagens() {
         name: 'copiar-imagens',
         apply: 'build',
         async closeBundle() {
-            await cp(resolve(raiz, 'imagens'), resolve(raiz, 'dist/imagens'), { recursive: true });
+            await cp(resolve(raiz, 'imagens'), resolve(raiz, 'dist/imagens'), {
+                recursive: true,
+                // Os originais em alta resolução são só a matriz para npm run imagens
+                filter: (origem) => !origem.includes('originais'),
+            });
         },
     };
 }

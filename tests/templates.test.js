@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { escapar, formatarMoeda, badge, barraMeta, cardProjeto } from '../js/modules/templates.js';
+import { escapar, formatarMoeda, badge, barraMeta, cardProjeto, foto } from '../js/modules/templates.js';
 import { PROJETOS } from '../js/data/projetos.js';
 
 test('escapar() neutraliza HTML digitado pelo usuário (XSS)', () => {
@@ -35,4 +35,21 @@ test('cardProjeto() desabilita a doação quando a meta foi atingida', () => {
 
     assert.match(cardProjeto(concluido), /disabled>Meta atingida/);
     assert.match(cardProjeto(emAndamento), new RegExp(`data-doar="${emAndamento.id}"`));
+});
+
+test('foto() oferece AVIF e WebP com JPEG de reserva em todas as larguras', () => {
+    const html = foto('hero-voluntarios', { alt: 'Voluntários', sizes: '100vw' });
+    assert.match(html, /<source type="image\/avif" srcset="[^"]*-400\.avif 400w, [^"]*-800\.avif 800w"/);
+    assert.match(html, /<source type="image\/webp" srcset="[^"]*-400\.webp 400w, [^"]*-800\.webp 800w"/);
+    assert.match(html, /<img[^>]*src="\.\.\/imagens\/hero-voluntarios-800\.jpg"/);
+});
+
+test('foto() reserva o espaço da imagem e só adia o que está fora da primeira tela', () => {
+    const comum = foto('hero-voluntarios');
+    const principal = foto('hero-voluntarios', { prioridade: true });
+
+    assert.match(comum, /width="800" height="533"/);
+    assert.match(comum, /loading="lazy"/);
+    assert.match(principal, /fetchpriority="high"/);
+    assert.doesNotMatch(principal, /loading="lazy"/);
 });
