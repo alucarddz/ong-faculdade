@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ONG Faculdade: projetos sociais, voluntariado e doações.">
+    <title>ONG Faculdade</title>
+    <link rel="icon" href="../imagens/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/buttons.css">
+    <link rel="stylesheet" href="../css/forms.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/feedback.css">
+    <script type="module" src="../js/main.js"></script>
+</head>
+<body>
+    <a class="link-pulo" href="#app">Pular para o conteúdo</a>
+
+    <!-- Cabeçalho e navegação: fixos em todas as telas da SPA -->
+    <header class="header">
+        <div class="container header__conteudo">
+            <a class="header__marca" href="#/inicio">
+                <img src="../imagens/logo.png" alt="" width="44" height="44">
+                <span>ONG Faculdade</span>
+            </a>
+
+            <button type="button" class="nav__toggle" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menu">
+                <span class="nav__toggle-linha"></span>
+                <span class="nav__toggle-linha"></span>
+                <span class="nav__toggle-linha"></span>
+            </button>
+
+            <nav class="nav" aria-label="Principal">
+                <ul class="nav__lista" id="menu-principal">
+                    <li><a class="nav__link" href="#/inicio" data-rota>Início</a></li>
+                    <li class="nav__item--dropdown">
+                        <div class="nav__dropdown-topo">
+                            <a class="nav__link" href="#/projetos" data-rota>Projetos</a>
+                            <button type="button" class="nav__subtoggle" aria-expanded="false" aria-controls="submenu-projetos" aria-label="Mostrar lista de projetos">
+                                <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                            </button>
+                        </div>
+                        <!-- Os itens de cada projeto são gerados pelo JS a partir de js/data/projetos.js -->
+                        <ul class="nav__submenu" id="submenu-projetos">
+                            <li><a class="nav__sublink" href="#/projetos">Todos os projetos</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="nav__link" href="#/cadastro" data-rota>Cadastro</a></li>
+                    <li class="nav__cta">
+                        <button type="button" class="btn btn--doar" data-doar>
+                            <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+                            Doe agora
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+            <div class="nav__overlay" aria-hidden="true"></div>
+        </div>
+    </header>
+
+    <!-- Conteúdo trocado pelo roteador (js/modules/router.js) -->
+    <main id="app" tabindex="-1">
+        <noscript>
+            <div class="container secao">
+                <p>Ative o JavaScript para navegar pela plataforma da ONG Faculdade.</p>
+            </div>
+        </noscript>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__topo">
+                <a class="header__marca" href="#/inicio">
+                    <img src="../imagens/logo.png" alt="" width="44" height="44">
+                    <span>ONG Faculdade</span>
+                </a>
+                <ul class="footer__links">
+                    <li><a href="#/inicio">Início</a></li>
+                    <li><a href="#/projetos">Projetos</a></li>
+                    <li><a href="#/cadastro">Cadastro</a></li>
+                    <li><a href="componentes.html">Guia de componentes</a></li>
+                </ul>
+                <address class="footer__contato">
+                    <p>Telefone: +55 (41) 3030-3030</p>
+                    <p>E-mail: contato@ongfaculdade.org.br</p>
+                </address>
+            </div>
+            <div class="footer__base">
+                <p><small>Todos os direitos reservados · ONG Faculdade &copy; 2026</small></p>
+                <div class="footer__social">
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                        <img src="../imagens/icones/instagram.png" alt="Instagram da ONG" width="28" height="28">
+                    </a>
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                        <img src="../imagens/icones/facebook.png" alt="Facebook da ONG" width="28" height="28">
+                    </a>
+                    <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+                        <img src="../imagens/icones/youtube.png" alt="YouTube da ONG" width="28" height="28">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de doação (aberto por qualquer botão com data-doar) -->
+    <dialog class="modal" id="modal-doacao" aria-labelledby="modal-titulo">
+        <form method="dialog">
+            <div class="modal__cabecalho">
+                <div class="modal__titulo-grupo">
+                    <span class="modal__icone" aria-hidden="true">
+                        <svg class="icone" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+                    </span>
+                    <div>
+                        <h2 class="modal__titulo" id="modal-titulo">Fazer uma doação</h2>
+                        <p class="modal__subtitulo">Escolha o projeto e o valor</p>
+                    </div>
+                </div>
+                <button type="submit" class="btn-fechar" value="cancelar" formnovalidate aria-label="Fechar">
+                    <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            <div class="modal__corpo">
+                <div class="form__grupo">
+                    <label class="form__rotulo" for="doacao-projeto">Projeto</label>
+                    <select class="form__campo" id="doacao-projeto" name="projeto"></select>
+                </div>
+
+                <fieldset class="opcoes-valor">
+                    <legend class="form__rotulo">Valor da doação</legend>
+                    <label><input type="radio" name="valor" value="25"><span>R$ 25</span></label>
+                    <label><input type="radio" name="valor" value="50" checked><span>R$ 50</span></label>
+                    <label><input type="radio" name="valor" value="100"><span>R$ 100</span></label>
+                    <label><input type="radio" name="valor" value="200"><span>R$ 200</span></label>
+                </fieldset>
+
+                <div class="alerta alerta--info">
+                    <svg class="icone alerta__icone" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                    <div class="alerta__conteudo">
+                        <p class="alerta__texto">87% do valor arrecadado vai direto para as ações de campo. Pagamento via PIX.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal__rodape">
+                <button type="submit" class="btn btn--contorno" value="cancelar" formnovalidate>Cancelar</button>
+                <button type="submit" class="btn btn--doar" value="confirmar">Confirmar doação</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- Área onde os toasts aparecem -->
+    <div class="toasts" id="toasts" aria-live="polite"></div>
+</body>
+</html>
