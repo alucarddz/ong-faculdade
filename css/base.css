@@ -33,9 +33,15 @@ h2 { font-size: var(--fs-h2); }
 h3 { font-size: var(--fs-h3); }
 h4 { font-size: var(--fs-h4); }
 
+picture,
 img {
     display: block;
     max-width: 100%;
+}
+
+/* A altura acompanha a largura: width/height no HTML só reservam a proporção */
+img {
+    height: auto;
 }
 
 a {

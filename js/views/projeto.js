@@ -1,7 +1,7 @@
 // Página de detalhe de um projeto (#/projetos/:id)
 
 import { PROJETOS, buscarProjeto } from '../data/projetos.js';
-import { badge, barraMeta, cardProjeto, escapar, icone, metaAtingida } from '../modules/templates.js';
+import { badge, barraMeta, cardProjeto, escapar, foto, icone, metaAtingida, TAMANHOS } from '../modules/templates.js';
 import { naoEncontrada } from './nao-encontrada.js';
 
 export const projeto = {
@@ -23,7 +23,7 @@ export const projeto = {
 
                     <div class="grid detalhe">
                         <div class="col-12 col-lg-7">
-                            <img class="imagem-arredondada detalhe__imagem" src="${dados.imagem}" alt="${escapar(dados.alt)}">
+                            ${foto(dados.imagem, { classe: 'imagem-arredondada detalhe__imagem', alt: dados.alt, sizes: TAMANHOS.detalhe, prioridade: true })}
                         </div>
                         <div class="col-12 col-lg-5 detalhe__info">
                             <div class="badges">
