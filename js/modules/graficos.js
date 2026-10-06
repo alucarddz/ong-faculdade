@@ -25,6 +25,10 @@ function carregarChart() {
             : { duration: 600 };
 
         return Chart;
+    }).catch((erro) => {
+        // Sem isso a falha ficaria guardada e nunca haveria nova tentativa ao voltar a conexão
+        carregamento = null;
+        throw erro;
     });
     return carregamento;
 }
