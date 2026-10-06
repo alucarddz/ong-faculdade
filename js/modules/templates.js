@@ -33,6 +33,38 @@ export function icone(nome, classe = '') {
     return `<svg class="icone ${classe}" viewBox="0 0 24 24" aria-hidden="true">${CAMINHOS_ICONES[nome]}</svg>`;
 }
 
+// ---------- Foto responsiva ----------
+// Gera <picture> com AVIF e WebP e um JPEG de reserva para navegadores antigos.
+// "sizes" informa a largura exibida em cada breakpoint; com o srcset, o navegador baixa
+// a menor versão suficiente para a tela (inclusive considerando a densidade de pixels).
+// As versões são geradas por scripts/otimizar-imagens.js.
+export const LARGURAS_FOTO = [400, 800];
+const PROPORCAO_FOTO = { largura: 800, altura: 533 };
+
+export function foto(nome, { alt = '', classe = '', sizes = '100vw', prioridade = false } = {}) {
+    const srcset = (formato) => LARGURAS_FOTO
+        .map((largura) => `../imagens/${nome}-${largura}.${formato} ${largura}w`)
+        .join(', ');
+    // A primeira imagem da tela carrega com prioridade; as demais só quando se aproximam da viewport
+    const carregamento = prioridade ? 'fetchpriority="high"' : 'loading="lazy"';
+
+    return `<picture>
+            <source type="image/avif" srcset="${srcset('avif')}" sizes="${sizes}">
+            <source type="image/webp" srcset="${srcset('webp')}" sizes="${sizes}">
+            <img class="${classe}" src="../imagens/${nome}-800.jpg" srcset="${srcset('jpg')}" sizes="${sizes}"
+                 width="${PROPORCAO_FOTO.largura}" height="${PROPORCAO_FOTO.altura}" alt="${escapar(alt)}"
+                 decoding="async" ${carregamento}>
+        </picture>`;
+}
+
+// Larguras exibidas (ver layout.css): container de 1200px, grid de 12 colunas e gutter de 32px
+export const TAMANHOS = {
+    card: '(min-width: 1200px) 368px, (min-width: 992px) calc((100vw - 96px) / 3), (min-width: 768px) calc((100vw - 56px) / 2), calc(100vw - 32px)',
+    metade: '(min-width: 1200px) 568px, (min-width: 992px) calc((100vw - 64px) / 2), calc(100vw - 32px)',
+    detalhe: '(min-width: 1200px) 668px, (min-width: 992px) calc((100vw - 32px) * 0.58), calc(100vw - 32px)',
+    sobre: '(min-width: 1200px) 468px, (min-width: 992px) calc((100vw - 32px) * 0.4), calc(100vw - 32px)',
+};
+
 // ---------- Badge ----------
 // tipo: sucesso | erro | aviso | info | primario | urgente | doar | contorno
 export function badge(texto, tipo = '', { ponto = false, comIcone = null } = {}) {
@@ -82,7 +114,7 @@ export function cardProjeto(projeto) {
     return `
         <article class="card-projeto" data-categoria="${escapar(projeto.categoria.nome)}">
             <a class="card-projeto__midia" href="#/projetos/${projeto.id}" tabindex="-1" aria-hidden="true">
-                <img src="${projeto.imagem}" alt="" loading="lazy">
+                ${foto(projeto.imagem, { sizes: TAMANHOS.card })}
             </a>
             <div class="card-projeto__corpo">
                 <div class="badges">

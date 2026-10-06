@@ -12,6 +12,7 @@ Projeto acadêmico da disciplina de Desenvolvimento Front-end.
 - [Pré-requisitos](#pré-requisitos)
 - [Instalação e execução](#instalação-e-execução)
 - [Build](#build)
+- [Imagens](#imagens)
 - [Testes](#testes)
 - [Estrutura de pastas](#estrutura-de-pastas)
 - [Arquitetura](#arquitetura)
@@ -43,8 +44,9 @@ Projeto acadêmico da disciplina de Desenvolvimento Front-end.
 | Node.js | Servidor local (`npm start`), testes (`npm test`) e build (`npm run build`) |
 | [Vite 8](https://vite.dev/) | Build de produção: empacota os módulos e minifica CSS e JS |
 | [html-minifier-terser](https://github.com/terser/html-minifier-terser) | Minificação do HTML durante a build |
+| [sharp](https://sharp.pixelplumbing.com/) | Geração das imagens otimizadas (AVIF, WebP, JPEG e PNG) |
 
-O site não tem dependências em tempo de execução. As únicas dependências npm são de desenvolvimento (Vite e html-minifier-terser), usadas apenas na build; o servidor local e os testes usam só módulos nativos do Node.
+O site não tem dependências em tempo de execução. As únicas dependências npm são de desenvolvimento (Vite, html-minifier-terser e sharp), usadas apenas na build e na geração de imagens; o servidor local e os testes usam só módulos nativos do Node.
 
 ## Pré-requisitos
 
@@ -92,6 +94,27 @@ O `vite.config.js` define:
 | Total com gzip | 43,5 KB | 28,6 KB | 34% |
 
 A página inicial passa de 22 requisições de CSS e JS (8 + 14) para 3.
+
+## Imagens
+
+Os originais em alta resolução ficam em `imagens/originais/` e não são servidos. As versões do site são geradas com:
+
+```bash
+npm run imagens
+```
+
+- **Fotos:** larguras de 400 e 800px em AVIF, WebP e JPEG de reserva, servidas com `<picture>`, `srcset` e `sizes` (função `foto()` em `templates.js`): o navegador baixa a menor versão suficiente para a tela
+- **Logo e ícones:** redimensionados para 2× o tamanho exibido. Os ícones usam WebP com PNG de reserva; no logo, o PNG com paleta (4,2 KB) ficou menor que o WebP (4,4 KB) e por isso é servido sozinho
+- `width`/`height` em todas as imagens (reserva o espaço e evita mudança de layout), `loading="lazy"` fora da primeira tela e `fetchpriority="high"` na imagem principal
+
+Medido na build, com rede móvel simulada (1,6 Mbps, 150 ms de latência, tela de celular):
+
+| Página inicial | Antes (v1.3.0) | Depois | Redução |
+|---|---|---|---|
+| Imagens baixadas | 1.212 KB | 40 KB | 97% |
+| Total transferido | 1.293 KB | 131 KB | 90% |
+| Evento `load` | 6,75 s | 1,11 s | 84% |
+| LCP | 2,30 s | 1,09 s | 53% |
 Para publicar, envie a pasta `dist/` para qualquer hospedagem estática (GitHub Pages, Netlify, Vercel).
 Como o roteamento usa hash, nenhuma configuração de redirecionamento no servidor é necessária.
 
@@ -130,13 +153,13 @@ ong-faculdade/
 │   ├── components.css      # cards, barra de meta, filtros, gráficos
 │   ├── feedback.css        # badges, alertas, modal, toasts
 │   └── guia.css            # estilos exclusivos do guia de componentes
-├── imagens/                # logo, fotos e /icones
+├── imagens/                # versões otimizadas (originais/ guarda as matrizes)
 ├── js/
 │   ├── main.js             # ponto de entrada: rotas e inicialização
 │   ├── data/projetos.js    # dados dos projetos
 │   ├── modules/            # router, templates, validacao, storage, feedback, graficos, temas
 │   └── views/              # uma tela por arquivo
-├── scripts/servidor.js     # servidor local de desenvolvimento
+├── scripts/                # servidor local e geração de imagens
 ├── tests/                  # testes automatizados
 ├── vite.config.js          # configuração da build de produção
 └── package.json            # scripts start, build, preview e test

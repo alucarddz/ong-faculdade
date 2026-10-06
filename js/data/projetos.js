@@ -7,7 +7,7 @@ export const PROJETOS = [
         titulo: 'Projeto Prato Cheio',
         categoria: { nome: 'Alimentação', tipo: 'aviso' },
         status: { nome: 'Urgente', tipo: 'urgente' },
-        imagem: '../imagens/hero-voluntarios.jpg',
+        imagem: 'hero-voluntarios',
         alt: 'Voluntários distribuindo cestas de alimentos',
         resumo: 'Distribuição mensal de cestas de alimentos e refeições prontas para famílias em situação de extrema vulnerabilidade alimentar.',
         descricao: [
@@ -23,7 +23,7 @@ export const PROJETOS = [
         titulo: 'Projeto Educar para o Futuro',
         categoria: { nome: 'Educação', tipo: 'info' },
         status: { nome: 'Ativo', tipo: 'primario' },
-        imagem: '../imagens/hero-voluntarios.jpg',
+        imagem: 'hero-voluntarios',
         alt: 'Crianças em oficina de reforço escolar',
         resumo: 'Oficinas socioeducativas, reforço escolar e capacitação em habilidades digitais para crianças e adolescentes da periferia.',
         descricao: [
@@ -39,7 +39,7 @@ export const PROJETOS = [
         titulo: 'Projeto Acolhimento e Saúde',
         categoria: { nome: 'Saúde', tipo: 'sucesso' },
         status: { nome: 'Ativo', tipo: 'primario' },
-        imagem: '../imagens/hero-voluntarios.jpg',
+        imagem: 'hero-voluntarios',
         alt: 'Equipe de saúde em atendimento comunitário',
         resumo: 'Triagens de saúde básica, orientações psicológicas e encaminhamentos comunitários para atendimento digno.',
         descricao: [
