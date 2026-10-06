@@ -1,0 +1,280 @@
+/* ==========================================================================
+   LAYOUT - grid de 12 colunas, breakpoints e estrutura das telas
+   Mobile-first: 576 · 768 · 992 · 1200 · 1400px
+   ========================================================================== */
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+#app {
+    flex: 1;
+}
+
+#app:focus {
+    outline: none;
+}
+
+/* Animação de entrada a cada troca de rota */
+.tela--entrar {
+    animation: tela-entrar 0.3s ease;
+}
+
+@keyframes tela-entrar {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Grid de 12 colunas ---------- */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--gutter);
+}
+
+.grid > * {
+    grid-column: span 12;
+}
+
+.col-12 { grid-column: span 12; }
+
+/* 576px: celulares grandes */
+@media (min-width: 576px) {
+    .col-sm-6 { grid-column: span 6; }
+}
+
+/* 768px: tablets */
+@media (min-width: 768px) {
+    .col-md-4 { grid-column: span 4; }
+    .col-md-6 { grid-column: span 6; }
+    .col-md-8 { grid-column: span 8; }
+}
+
+/* 992px: notebooks */
+@media (min-width: 992px) {
+    .col-lg-3 { grid-column: span 3; }
+    .col-lg-4 { grid-column: span 4; }
+    .col-lg-5 { grid-column: span 5; }
+    .col-lg-6 { grid-column: span 6; }
+    .col-lg-7 { grid-column: span 7; }
+    .col-lg-8 { grid-column: span 8; }
+}
+
+/* 1200px: desktops */
+@media (min-width: 1200px) {
+    :root {
+        --gutter: var(--esp-5);
+    }
+}
+
+/* 1400px: telas panorâmicas (container ampliado em variables.css) */
+
+/* ---------- Link de pulo (acessibilidade) ---------- */
+.link-pulo {
+    position: absolute;
+    top: var(--esp-2);
+    left: var(--esp-2);
+    z-index: calc(var(--z-header) + 1);
+    padding: var(--esp-2) var(--esp-3);
+    border-radius: var(--raio-borda);
+    background-color: var(--cor-branco);
+    font-weight: var(--peso-medio);
+    transform: translateY(-200%);
+    transition: transform var(--transicao);
+}
+
+.link-pulo:focus {
+    transform: translateY(0);
+}
+
+/* ---------- Seções ---------- */
+.secao {
+    padding-block: var(--esp-6);
+}
+
+.secao--alternada {
+    background-color: var(--cor-branco);
+}
+
+.secao__cabecalho {
+    margin-bottom: var(--esp-5);
+}
+
+/* Dentro do grid, o gap já faz o espaçamento */
+.grid > .secao__cabecalho {
+    margin-bottom: 0;
+}
+
+.secao__cabecalho h2 {
+    margin-bottom: var(--esp-2);
+}
+
+.secao__cabecalho p {
+    max-width: 60ch;
+    color: var(--cor-texto-suave);
+}
+
+.cabecalho-pagina {
+    padding-block: var(--esp-6);
+    background-color: var(--cor-primaria-escura);
+    color: var(--cor-branco);
+}
+
+.cabecalho-pagina h1 {
+    margin-bottom: var(--esp-2);
+}
+
+.cabecalho-pagina p {
+    max-width: 60ch;
+    opacity: 0.9;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+    padding-block: var(--esp-6);
+    background: linear-gradient(160deg, var(--cor-sucesso-clara) 0%, var(--cor-fundo-alt) 70%);
+}
+
+.hero__grid {
+    align-items: center;
+}
+
+.hero__conteudo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--esp-3);
+}
+
+.hero__texto {
+    font-size: var(--fs-h4);
+    color: var(--cor-texto-suave);
+}
+
+.hero__acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--esp-2);
+}
+
+.hero__acoes .btn {
+    flex: 1 1 100%;
+}
+
+@media (min-width: 576px) {
+    .hero__acoes .btn {
+        flex: 0 0 auto;
+    }
+}
+
+.hero__imagem,
+.imagem-arredondada {
+    width: 100%;
+    border-radius: var(--raio-grande);
+    object-fit: cover;
+    box-shadow: var(--sombra-2);
+}
+
+.hero__imagem {
+    aspect-ratio: 4 / 3;
+}
+
+.sobre {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--esp-3);
+}
+
+.sobre p {
+    color: var(--cor-texto-suave);
+}
+
+@media (min-width: 992px) {
+    .secao,
+    .hero {
+        padding-block: var(--esp-7);
+    }
+}
+
+/* ---------- Rodapé ---------- */
+.footer {
+    padding-block: var(--esp-5) var(--esp-4);
+    background-color: var(--cor-primaria-escura);
+    color: var(--cor-branco);
+}
+
+.footer a {
+    color: var(--cor-branco);
+}
+
+.footer__topo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--esp-4);
+    padding-bottom: var(--esp-4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--esp-2) var(--esp-4);
+    list-style: none;
+}
+
+.footer__links a {
+    text-decoration: none;
+}
+
+.footer__links a:hover {
+    text-decoration: underline;
+}
+
+.footer__contato {
+    font-style: normal;
+    font-size: var(--fs-pequeno);
+    opacity: 0.9;
+}
+
+.footer__base {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--esp-3);
+    padding-top: var(--esp-4);
+    text-align: center;
+}
+
+.footer__social {
+    display: flex;
+    gap: var(--esp-3);
+}
+
+.footer__social a {
+    flex-shrink: 0;
+    display: inline-flex;
+    padding: var(--esp-1);
+    border-radius: var(--raio-borda);
+    background-color: var(--cor-branco);
+    transition: transform var(--transicao);
+}
+
+.footer__social a:hover {
+    transform: translateY(-2px);
+}
+
+@media (min-width: 768px) {
+    .footer__topo {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .footer__base {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
