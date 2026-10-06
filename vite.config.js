@@ -3,7 +3,7 @@
 
 import { defineConfig } from 'vite';
 import { minify } from 'html-minifier-terser';
-import { cp } from 'node:fs/promises';
+import { cp, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 const raiz = import.meta.dirname;
@@ -21,6 +21,11 @@ function copiarImagens() {
                 // Os originais em alta resolução são só a matriz para npm run imagens
                 filter: (origem) => !origem.includes('originais'),
             });
+            // As páginas ficam em dist/html/; a raiz do site redireciona para a página inicial
+            await writeFile(resolve(raiz, 'dist/index.html'),
+                '<!DOCTYPE html><meta charset="utf-8"><title>ONG Faculdade</title>'
+                + '<meta http-equiv="refresh" content="0; url=html/index.html">'
+                + '<a href="html/index.html">Abrir a ONG Faculdade</a>');
         },
     };
 }

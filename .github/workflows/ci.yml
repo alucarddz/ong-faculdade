@@ -1,0 +1,29 @@
+# Integração contínua: todo pull request (e todo push na develop) precisa passar
+# nos testes e gerar a build sem erro antes do merge.
+name: CI
+
+on:
+  pull_request:
+    branches: [develop, main]
+  push:
+    branches: [develop]
+
+jobs:
+  testes-e-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependências (versões exatas do package-lock.json)
+        run: npm ci
+
+      - name: Testes (validação, templates, localStorage, temas e contraste WCAG)
+        run: npm test
+
+      - name: Build de produção
+        run: npm run build
