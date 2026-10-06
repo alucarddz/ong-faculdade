@@ -6,6 +6,19 @@
     <meta name="description" content="ONG Faculdade: projetos sociais, voluntariado e doações.">
     <title>ONG Faculdade</title>
     <link rel="icon" href="../imagens/logo.png">
+    <script>
+        // Aplica o tema salvo antes da primeira pintura, evitando o "piscar" do tema claro.
+        // Mesma regra de js/modules/temas.js (resolverTema), em versão mínima.
+        (function () {
+            var preferencia = 'auto';
+            try { preferencia = JSON.parse(localStorage.getItem('ong:pref:tema')) || 'auto'; } catch (erro) {}
+            var consulta = window.matchMedia;
+            var tema = ['claro', 'escuro', 'alto-contraste'].indexOf(preferencia) >= 0 ? preferencia
+                : consulta('(prefers-contrast: more)').matches ? 'alto-contraste'
+                : consulta('(prefers-color-scheme: dark)').matches ? 'escuro' : 'claro';
+            document.documentElement.dataset.tema = tema;
+        })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
@@ -52,6 +65,15 @@
                         </ul>
                     </li>
                     <li><a class="nav__link" href="#/cadastro" data-rota>Cadastro</a></li>
+                    <li class="nav__tema">
+                        <label class="visualmente-oculto" for="seletor-tema">Tema de cores</label>
+                        <select class="nav__tema-seletor" id="seletor-tema">
+                            <option value="auto">Tema automático</option>
+                            <option value="claro">Tema claro</option>
+                            <option value="escuro">Tema escuro</option>
+                            <option value="alto-contraste">Alto contraste</option>
+                        </select>
+                    </li>
                     <li class="nav__cta">
                         <button type="button" class="btn btn--doar" data-doar>
                             <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>

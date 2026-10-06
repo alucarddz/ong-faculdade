@@ -79,7 +79,7 @@ body {
     z-index: calc(var(--z-header) + 1);
     padding: var(--esp-2) var(--esp-3);
     border-radius: var(--raio-borda);
-    background-color: var(--cor-branco);
+    background-color: var(--cor-superficie);
     font-weight: var(--peso-medio);
     transform: translateY(-200%);
     transition: transform var(--transicao);
@@ -95,7 +95,7 @@ body {
 }
 
 .secao--alternada {
-    background-color: var(--cor-branco);
+    background-color: var(--cor-superficie);
 }
 
 .secao__cabecalho {
@@ -118,7 +118,7 @@ body {
 
 .cabecalho-pagina {
     padding-block: var(--esp-6);
-    background-color: var(--cor-primaria-escura);
+    background-color: var(--cor-faixa);
     color: var(--cor-branco);
 }
 
@@ -202,7 +202,7 @@ body {
 /* ---------- Rodapé ---------- */
 .footer {
     padding-block: var(--esp-5) var(--esp-4);
-    background-color: var(--cor-primaria-escura);
+    background-color: var(--cor-faixa);
     color: var(--cor-branco);
 }
 

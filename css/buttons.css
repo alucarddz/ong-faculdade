@@ -37,8 +37,9 @@
 
 .btn:disabled,
 .btn[aria-disabled="true"] {
-    background-color: var(--cor-borda);
+    background-color: var(--cor-neutra-clara);
     border-color: var(--cor-borda);
+    border-style: dashed;
     color: var(--cor-texto-suave);
     opacity: 0.6;
     cursor: not-allowed;
@@ -50,22 +51,22 @@
 /* ---------- Variantes ---------- */
 .btn--primario {
     background-color: var(--cor-primaria);
-    color: var(--cor-branco);
+    color: var(--cor-sobre-cor);
 }
 
 .btn--primario:hover {
-    background-color: var(--cor-primaria-escura);
-    box-shadow: 0 4px 12px rgba(27, 107, 79, 0.3);
+    background-color: var(--cor-primaria-hover);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--cor-primaria) 30%, transparent);
 }
 
 .btn--doar {
     background-color: var(--cor-secundaria);
-    color: var(--cor-texto);
+    color: var(--cor-sobre-ambar);
 }
 
 .btn--doar:hover {
     background-color: var(--cor-secundaria-escura);
-    box-shadow: 0 4px 12px rgba(217, 138, 31, 0.35);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--cor-secundaria) 35%, transparent);
 }
 
 .btn--contorno {
@@ -76,27 +77,27 @@
 
 .btn--contorno:hover {
     background-color: var(--cor-primaria);
-    color: var(--cor-branco);
+    color: var(--cor-sobre-cor);
 }
 
 .btn--erro {
     background-color: var(--cor-erro);
-    color: var(--cor-branco);
+    color: var(--cor-sobre-cor);
 }
 
 .btn--erro:hover {
-    background-color: #A61F1F;
-    box-shadow: 0 4px 12px rgba(198, 40, 40, 0.3);
+    background-color: var(--cor-erro-hover);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--cor-erro) 30%, transparent);
 }
 
 .btn--info {
     background-color: var(--cor-destaque);
-    color: var(--cor-branco);
+    color: var(--cor-sobre-cor);
 }
 
 .btn--info:hover {
-    background-color: #244A87;
-    box-shadow: 0 4px 12px rgba(47, 93, 168, 0.3);
+    background-color: var(--cor-destaque-hover);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--cor-destaque) 30%, transparent);
 }
 
 .btn--bloco {
@@ -120,6 +121,6 @@
 }
 
 .btn-fechar:hover {
-    background-color: rgba(31, 41, 55, 0.08);
+    background-color: var(--cor-hover-sutil);
     color: var(--cor-texto);
 }
